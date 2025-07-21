@@ -73,9 +73,8 @@ public class FileDataService {
         }
 
         // Запись файла/в файл
-        try {
-            FileWriter fileWriter = new FileWriter(fullFileName, append);
-            BufferedWriter writer = new BufferedWriter(fileWriter);
+        try (FileWriter fileWriter = new FileWriter(fullFileName, append);
+             BufferedWriter writer = new BufferedWriter(fileWriter)) {
 
             for (Object item : list) {
                 writer.write(item.toString());
