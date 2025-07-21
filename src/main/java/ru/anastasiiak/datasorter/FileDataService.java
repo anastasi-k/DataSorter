@@ -39,16 +39,14 @@ public class FileDataService {
         }
 
         // Чтение файла
-        try {
-            FileReader fileReader = new FileReader(fullFileName);
-            BufferedReader reader = new BufferedReader(fileReader);
+        try (FileReader fileReader = new FileReader(fullFileName);
+             BufferedReader reader = new BufferedReader(fileReader)) {
 
             String line;
             while ((line = reader.readLine()) != null) {
                 receiverList.add(line);
             }
 
-            reader.close();
         } catch (Exception exception) {
             String errMsg = MessageFormat.format(
                     "Не удалось загрузить файл ''{0}'': {1}",
